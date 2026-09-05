@@ -56,6 +56,27 @@
     body:hover #cursor { transform: translate(-50%, -50%) scale(1); }
     a:hover ~ #cursor, button:hover ~ #cursor { transform: translate(-50%, -50%) scale(2); }
 
+    /* ─── GRID BACKGROUND ─── */
+    #grid-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.3;
+    }
+
+    /* ─── GRAIN OVERLAY ─── */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.4;
+    }
+
     /* ─── CANVAS ─── */
     #particles-canvas {
       position: fixed;
@@ -70,9 +91,9 @@
       position: fixed; top: 0; width: 100%;
       padding: 20px 8vw;
       display: flex; justify-content: space-between; align-items: center;
-      background: rgba(2,13,24,0.8);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(0,229,255,0.08);
+      background: rgba(5,5,5,0.85);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
       z-index: 100;
       transition: padding 0.3s;
     }
@@ -834,7 +855,8 @@
   <div id="cursor"></div>
   <div id="cursor-ring"></div>
 
-  <!-- Particles -->
+  <!-- Background: Grid + Particles -->
+  <canvas id="grid-canvas"></canvas>
   <canvas id="particles-canvas"></canvas>
 
   <!-- NAV -->
@@ -1309,67 +1331,87 @@
       });
     });
 
-    // ─── PARTICLES ───
-    const canvas = document.getElementById('particles-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
+    // ─── RAZORPAY-STYLE GRID ANIMATION ───
+    const gridCanvas = document.getElementById('grid-canvas');
+    const gCtx = gridCanvas.getContext('2d');
 
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    function resizeGrid() {
+      gridCanvas.width = window.innerWidth;
+      gridCanvas.height = window.innerHeight;
     }
-    resize();
-    window.addEventListener('resize', resize);
+    resizeGrid();
+    window.addEventListener('resize', resizeGrid);
 
-    class Particle {
-      constructor() { this.reset(); }
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1.5 + 0.3;
-        this.speedX = (Math.random() - 0.5) * 0.3;
-        this.speedY = (Math.random() - 0.5) * 0.3;
-        this.opacity = Math.random() * 0.4 + 0.1;
-        this.pulse = Math.random() * Math.PI * 2;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        this.pulse += 0.02;
-        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
-      }
-      draw() {
-        const op = this.opacity * (0.7 + 0.3 * Math.sin(this.pulse));
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0,229,255,${op})`;
-        ctx.fill();
-      }
-    }
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    window.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
 
-    for (let i = 0; i < 80; i++) particles.push(new Particle());
+    let gridTime = 0;
 
-    function drawParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // Draw connecting lines
-      particles.forEach((a, i) => {
-        particles.slice(i + 1).forEach(b => {
-          const dx = a.x - b.x, dy = a.y - b.y;
+    function drawGrid() {
+      const w = gridCanvas.width;
+      const h = gridCanvas.height;
+      gCtx.clearRect(0, 0, w, h);
+
+      const cellSize = 60;
+      const cols = Math.ceil(w / cellSize) + 2;
+      const rows = Math.ceil(h / cellSize) + 2;
+
+      for (let col = 0; col < cols; col++) {
+        for (let row = 0; row < rows; row++) {
+          const x = col * cellSize;
+          const y = row * cellSize;
+
+          // Distance from mouse for glow
+          const dx = x - mouseX;
+          const dy = y - mouseY;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(255,255,255,${0.02 * (1 - dist / 120)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
+          const proximity = Math.max(0, 1 - dist / 320);
+
+          // Subtle breathing offset
+          const breathe = Math.sin(gridTime * 0.6 + col * 0.3 + row * 0.3) * 0.4;
+
+          // Draw vertical line segment
+          gCtx.beginPath();
+          gCtx.moveTo(x, y);
+          gCtx.lineTo(x, y + cellSize);
+          gCtx.strokeStyle = `rgba(255,255,255,${0.04 + proximity * 0.12 + breathe * 0.01})`;
+          gCtx.lineWidth = 0.5;
+          gCtx.stroke();
+
+          // Draw horizontal line segment
+          gCtx.beginPath();
+          gCtx.moveTo(x, y);
+          gCtx.lineTo(x + cellSize, y);
+          gCtx.strokeStyle = `rgba(255,255,255,${0.04 + proximity * 0.12 + breathe * 0.01})`;
+          gCtx.lineWidth = 0.5;
+          gCtx.stroke();
+
+          // Glowing intersection dots near mouse
+          if (proximity > 0.3) {
+            gCtx.beginPath();
+            gCtx.arc(x, y, 1 + proximity * 1.5, 0, Math.PI * 2);
+            gCtx.fillStyle = `rgba(0,229,255,${proximity * 0.5})`;
+            gCtx.fill();
           }
-        });
-        a.update(); a.draw();
-      });
-      requestAnimationFrame(drawParticles);
+        }
+      }
+
+      // Cursor spotlight gradient
+      const spotlight = gCtx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 280);
+      spotlight.addColorStop(0, 'rgba(0,229,255,0.04)');
+      spotlight.addColorStop(1, 'rgba(0,0,0,0)');
+      gCtx.fillStyle = spotlight;
+      gCtx.fillRect(0, 0, w, h);
+
+      gridTime += 0.016;
+      requestAnimationFrame(drawGrid);
     }
-    drawParticles();
+    drawGrid();
+
+    // ─── PARTICLES (disabled - grid replaces this) ───
+    const canvas = document.getElementById('particles-canvas');
+    canvas.style.display = 'none';
 
     // ─── SCROLL REVEAL ───
     const observer = new IntersectionObserver(entries => {
@@ -1410,71 +1452,13 @@
     
     document.querySelectorAll('section').forEach(sec => sectionObserver.observe(sec));
 
-    // ─── ABOUT SECTION DYNAMIC BACKGROUND ───
+    // ─── ABOUT CANVAS (removed — grid covers entire site) ───
     const aboutCanvas = document.getElementById('about-canvas');
-    const aboutCtx = aboutCanvas.getContext('2d');
-    let aboutNodes = [];
+    if (aboutCanvas) aboutCanvas.style.display = 'none';
 
-    function resizeAbout() {
-      const section = document.getElementById('about');
-      aboutCanvas.width = section.clientWidth;
-      aboutCanvas.height = section.clientHeight;
-    }
-    resizeAbout();
-    window.addEventListener('resize', resizeAbout);
+  </script>
 
-    class AboutNode {
-      constructor() {
-        this.x = Math.random() * aboutCanvas.width;
-        this.y = Math.random() * aboutCanvas.height;
-        this.vx = (Math.random() - 0.5) * 0.2;
-        this.vy = (Math.random() - 0.5) * 0.2;
-        this.radius = Math.random() * 1.5 + 0.5;
-        this.baseAlpha = Math.random() * 0.15 + 0.05;
-        this.pulsePhase = Math.random() * Math.PI * 2;
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.pulsePhase += 0.01;
-        if (this.x < 0 || this.x > aboutCanvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > aboutCanvas.height) this.vy *= -1;
-      }
-      draw() {
-        const currentAlpha = this.baseAlpha * (0.8 + 0.5 * Math.sin(this.pulsePhase));
-        aboutCtx.beginPath();
-        aboutCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        aboutCtx.fillStyle = `rgba(255,255,255,${currentAlpha})`;
-        aboutCtx.fill();
-      }
-    }
 
-    for (let i = 0; i < 40; i++) aboutNodes.push(new AboutNode());
-
-    function animateAbout() {
-      aboutCtx.clearRect(0, 0, aboutCanvas.width, aboutCanvas.height);
-      
-      aboutNodes.forEach((node, i) => {
-        aboutNodes.slice(i + 1).forEach(other => {
-          const dx = node.x - other.x;
-          const dy = node.y - other.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          
-          if (dist < 150) {
-            aboutCtx.beginPath();
-            aboutCtx.moveTo(node.x, node.y);
-            aboutCtx.lineTo(other.x, other.y);
-            aboutCtx.strokeStyle = `rgba(255,255,255,${0.02 * (1 - dist / 150)})`;
-            aboutCtx.lineWidth = 0.5;
-            aboutCtx.stroke();
-          }
-        });
-        node.update();
-        node.draw();
-      });
-      requestAnimationFrame(animateAbout);
-    }
-    animateAbout();
 
   </script>
 </body>
