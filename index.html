@@ -465,22 +465,24 @@
       width: 100%;
     }
     .project-card {
-      background: rgba(255,255,255,0.01);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.005) 100%);
       border: 1px solid rgba(255,255,255,0.05);
+      border-top: 1px solid rgba(255,255,255,0.15);
       border-radius: 6px;
-      padding: 16px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
       transition: all 0.3s ease;
       position: relative;
     }
     .project-card.featured {
-      border-color: rgba(77,168,218,0.25);
-      background: rgba(77,168,218,0.015);
+      background: linear-gradient(180deg, rgba(77,168,218,0.06) 0%, rgba(77,168,218,0.01) 100%);
+      border-color: rgba(77,168,218,0.15);
+      border-top: 1px solid rgba(77,168,218,0.4);
     }
 
     .project-card:hover {
-      border-color: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.25);
       box-shadow: none;
       transform: translateY(-2px);
     }
@@ -513,42 +515,48 @@
     }
     .project-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 2px;
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .project-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--white);
+      margin-bottom: 12px;
     }
     .project-desc {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--gray);
-      line-height: 1.4;
-      margin-bottom: 12px;
+      line-height: 1.5;
+      margin-bottom: 16px;
       flex: 1;
     }
     .project-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-    .tech-tag {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
+      font-size: 0.7rem;
       color: var(--gray);
-      padding: 2px 8px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 4px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .project-tech span {
+      color: rgba(77,168,218,0.5);
+      margin: 0 4px;
     }
     .project-links {
       display: flex;
-      gap: 16px;
+      gap: 20px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 16px;
     }
     .btn-link {
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.75rem;
-      font-weight: 600;
+      font-size: 0.8rem;
+      font-weight: 500;
       color: var(--white);
       text-decoration: none;
       transition: color 0.2s;
@@ -991,18 +999,10 @@
               <span class="project-featured-label">FEATURED</span>
             </div>
             <h3 class="project-title">RepoPilot</h3>
-            <div style="color:var(--white);font-weight:600;font-size:0.85rem;margin-bottom:4px;">AI-Powered GitHub Demo Video Studio</div>
+            <div class="project-subtitle">AI-Powered GitHub Demo Video Studio</div>
             <p class="project-desc">An AI-powered platform that turns a GitHub repository into a polished project showcase with generated demo scripts, presentation assets, and narrated videos.</p>
             <div class="project-tech">
-              <span class="tech-tag">Next.js</span>
-              <span class="tech-tag">FastAPI</span>
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">Gemini</span>
-              <span class="tech-tag">Remotion</span>
-              <span class="tech-tag">React</span>
-              <span class="tech-tag">Supabase</span>
-              <span class="tech-tag">PostgreSQL</span>
-              <span class="tech-tag">Tailwind</span>
+              Next.js <span>·</span> FastAPI <span>·</span> Python <span>·</span> Gemini <span>·</span> Remotion <span>·</span> React <span>·</span> Supabase <span>·</span> PostgreSQL
             </div>
             <div class="project-links">
               <a href="https://repo-pilot-nine-nu.vercel.app/" target="_blank" class="btn-link">Live Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
@@ -1018,14 +1018,10 @@
               <span class="project-category">AI · Multimodal</span>
             </div>
             <h3 class="project-title">CanvasAI</h3>
-            <div style="color:var(--white);font-weight:600;font-size:0.85rem;margin-bottom:4px;">Multi-Agent Visual Learning</div>
+            <div class="project-subtitle">Multi-Agent Visual Learning</div>
             <p class="project-desc">An intelligent learning assistant combining visual understanding, retrieval, and multi-agent workflows to create a more interactive learning experience.</p>
             <div class="project-tech">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">LangGraph</span>
-              <span class="tech-tag">RAG</span>
-              <span class="tech-tag">Hugging Face</span>
-              <span class="tech-tag">Computer Vision</span>
+              Python <span>·</span> LangGraph <span>·</span> RAG <span>·</span> Hugging Face <span>·</span> Computer Vision
             </div>
             <div style="flex:1"></div>
             <div class="project-links">
@@ -1041,13 +1037,10 @@
               <span class="project-category">Computer Vision</span>
             </div>
             <h3 class="project-title">DeepTrace</h3>
-            <div style="color:var(--white);font-weight:600;font-size:0.85rem;margin-bottom:4px;">Deepfake Detection System</div>
+            <div class="project-subtitle">Deepfake Detection System</div>
             <p class="project-desc">A computer vision and deep learning system designed to identify manipulated visual content.</p>
             <div class="project-tech">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">Deep Learning</span>
-              <span class="tech-tag">OpenCV</span>
-              <span class="tech-tag">Computer Vision</span>
+              Python <span>·</span> Deep Learning <span>·</span> OpenCV <span>·</span> Computer Vision
             </div>
             <div style="flex:1"></div>
             <div class="project-links">
@@ -1063,15 +1056,10 @@
               <span class="project-category">NLP · Machine Learning</span>
             </div>
             <h3 class="project-title">Market Sentiment Predictor</h3>
-            <div style="color:var(--white);font-weight:600;font-size:0.85rem;margin-bottom:4px;">NLP-Based Market Sentiment Analysis</div>
+            <div class="project-subtitle">NLP-Based Market Sentiment Analysis</div>
             <p class="project-desc">An NLP and machine learning system that analyzes market-related text and predicts sentiment to identify useful trends.</p>
             <div class="project-tech">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">NLP</span>
-              <span class="tech-tag">Machine Learning</span>
-              <span class="tech-tag">Scikit-learn</span>
-              <span class="tech-tag">Pandas</span>
-              <span class="tech-tag">NumPy</span>
+              Python <span>·</span> NLP <span>·</span> Machine Learning <span>·</span> Scikit-learn <span>·</span> Pandas <span>·</span> NumPy
             </div>
             <div class="project-links">
               <a href="https://github.com/khushi-sharma2506/Market-Sentiment-and-Stock-Direction-Predictor.git" target="_blank" class="btn-link">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
