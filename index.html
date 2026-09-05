@@ -392,45 +392,13 @@
       grid-column: 1 / -1;
     }
     @media (min-width: 900px) {
-      .project-card.featured {
-        flex-direction: row;
-        align-items: stretch;
-      }
-      .project-card.featured .project-visual {
-        width: 55%;
-        border-bottom: none;
-        border-right: 1px solid rgba(255,255,255,0.05);
-      }
       .project-card.featured .project-info {
-        width: 45%;
         justify-content: center;
       }
     }
     .project-card:hover {
       border-color: rgba(77,168,218,0.4);
       box-shadow: 0 10px 40px rgba(77,168,218,0.05);
-    }
-    .project-visual {
-      height: 260px;
-      background: rgba(0,0,0,0.4);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .placeholder-content {
-      text-align: center;
-      color: rgba(139,148,158,0.5);
-      font-family: 'Fira Code', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 1px;
-      transition: transform 0.4s ease-out;
-    }
-    .project-card:hover .placeholder-content {
-      transform: scale(1.02);
-      color: rgba(77,168,218,0.8);
     }
     .project-info {
       padding: 32px;
@@ -804,12 +772,6 @@
         
         <!-- REPOPILOT -->
         <div class="project-card featured reveal">
-          <div class="project-visual">
-            <div class="placeholder-content">
-              <div style="font-size: 2rem; margin-bottom: 8px;">🖼️</div>
-              <div>[ INSERT REPOPILOT SCREENSHOT HERE ]</div>
-            </div>
-          </div>
           <div class="project-info">
             <div class="project-meta">
               <span class="project-category">GenAI · Full-Stack</span>
@@ -831,20 +793,13 @@
             </div>
             <div class="project-links">
               <a href="https://repo-pilot-nine-nu.vercel.app/" target="_blank" class="btn-link">Live Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
-              <!-- UPDATE GITHUB LINK HERE -->
-              <a href="#" target="_blank" class="btn-link">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
+              <a href="https://github.com/khushi-sharma2506/RepoPilot.git" target="_blank" class="btn-link">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
             </div>
           </div>
         </div>
 
         <!-- CANVASAI -->
         <div class="project-card reveal">
-          <div class="project-visual">
-            <div class="placeholder-content">
-              <div style="font-size: 2rem; margin-bottom: 8px;">🖼️</div>
-              <div>[ INSERT CANVASAI SCREENSHOT HERE ]</div>
-            </div>
-          </div>
           <div class="project-info">
             <div class="project-meta">
               <span class="project-category">AI · Multimodal</span>
@@ -869,12 +824,6 @@
 
         <!-- DEEPTRACE -->
         <div class="project-card reveal">
-          <div class="project-visual">
-            <div class="placeholder-content">
-              <div style="font-size: 2rem; margin-bottom: 8px;">🖼️</div>
-              <div>[ INSERT DEEPTRACE SCREENSHOT HERE ]</div>
-            </div>
-          </div>
           <div class="project-info">
             <div class="project-meta">
               <span class="project-category">Computer Vision</span>
@@ -898,12 +847,6 @@
 
         <!-- MARKET SENTIMENT PREDICTOR -->
         <div class="project-card wide reveal">
-          <div class="project-visual">
-            <div class="placeholder-content">
-              <div style="font-size: 2rem; margin-bottom: 8px;">🖼️</div>
-              <div>[ INSERT MARKET SENTIMENT SCREENSHOT HERE ]</div>
-            </div>
-          </div>
           <div class="project-info">
             <div class="project-meta">
               <span class="project-category">NLP · Machine Learning</span>
