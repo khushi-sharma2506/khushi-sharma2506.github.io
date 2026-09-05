@@ -217,8 +217,13 @@
       bottom: 40px; left: 50%;
       transform: translateX(-50%);
       display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .hero .scroll-indicator {
       opacity: 0;
       animation: fadeIn 1s 1.5s forwards;
+    }
+    section .scroll-indicator {
+      bottom: 10px;
     }
     .scroll-indicator span {
       font-family: 'Fira Code', monospace;
@@ -590,6 +595,10 @@
           <div class="focus-item"><div class="focus-dot"></div>AI Systems & Inference</div>
         </div>
       </div>
+      <div class="scroll-indicator reveal">
+        <span>scroll</span>
+        <div class="scroll-line"></div>
+      </div>
     </section>
 
     <!-- SKILLS -->
@@ -646,6 +655,10 @@
             <span class="tag">GitHub</span>
           </div>
         </div>
+      </div>
+      <div class="scroll-indicator reveal">
+        <span>scroll</span>
+        <div class="scroll-line"></div>
       </div>
     </section>
 
