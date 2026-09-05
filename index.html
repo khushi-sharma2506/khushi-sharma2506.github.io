@@ -328,22 +328,46 @@
       letter-spacing: 2px;
       margin-bottom: 20px;
     }
-    .focus-item {
-      display: flex; align-items: center; gap: 14px;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      color: var(--gray);
-      font-size: 0.92rem;
-      transition: color 0.2s;
+    .build-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
     }
-    .focus-item:last-child { border-bottom: none; }
-    .focus-item:hover { color: var(--white); }
-    .focus-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--blue);
-      flex-shrink: 0;
-      box-shadow: 0 0 8px var(--blue);
+    .build-item {
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px;
+      background: rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+    .build-item:hover {
+      border-color: rgba(77,168,218,0.3);
+      background: rgba(77,168,218,0.03);
+    }
+    .build-item-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .build-num {
+      font-family: 'Fira Code', monospace;
+      color: var(--blue);
+      font-size: 0.7rem;
+    }
+    .build-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      color: var(--white);
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .build-desc {
+      color: var(--gray);
+      font-size: 0.82rem;
+      line-height: 1.6;
     }
 
     /* ─── SKILLS ─── */
@@ -512,6 +536,7 @@
       section { padding: 80px 5vw; }
       .hero { padding: 0 5vw; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .build-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
       .skills-header { flex-direction: column; align-items: flex-start; gap: 20px; }
       #cursor, #cursor-ring { display: none; }
@@ -575,9 +600,9 @@
       <div class="section-title reveal">About Me</div>
       <div class="about-grid">
         <div class="about-text reveal">
-          <p>I'm a Computer Science student focused on software engineering. I build robust, full-stack applications with a strong edge in integrating practical <strong>AI, LLMs, and RAG pipelines</strong>.</p>
-          <p>My experience spans engineering <strong>backend/cloud systems</strong>, developing full-stack applications, and integrating machine learning and generative AI to solve real problems.</p>
-          <p>I thrive on taking ideas from raw concepts to production-ready software that people can <strong>actually use</strong>.</p>
+          <p>I'm a Computer Science student specializing in <strong>AI & ML</strong>. I'm interested in building practical AI systems and understanding what happens behind them.</p>
+          <p>I've worked across full-stack development, backend systems, machine learning, Generative AI, RAG pipelines, and computer vision.</p>
+          <p>I enjoy working on projects where I can take an idea from a concept to something people can <strong>actually use</strong>.</p>
           
           <div style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 24px;">
             <h4 style="font-family:'Fira Code',monospace;color:var(--gray);font-size:0.75rem;letter-spacing:2px;margin-bottom:12px;text-transform:uppercase;">Education</h4>
@@ -587,12 +612,37 @@
           </div>
         </div>
         <div class="currently-box reveal">
-          <h4>// areas of focus</h4>
-          <div class="focus-item"><div class="focus-dot"></div>Generative AI</div>
-          <div class="focus-item"><div class="focus-dot"></div>RAG & Agentic Systems</div>
-          <div class="focus-item"><div class="focus-dot"></div>Computer Vision</div>
-          <div class="focus-item"><div class="focus-dot"></div>Deep Learning</div>
-          <div class="focus-item"><div class="focus-dot"></div>AI Systems & Inference</div>
+          <h4>// what I build</h4>
+          <div class="build-grid">
+            <div class="build-item">
+              <div class="build-item-header">
+                <span class="build-num">01</span>
+                <span class="build-title">Full-Stack Applications</span>
+              </div>
+              <div class="build-desc">React / Next.js<br>TypeScript<br>Modern web applications</div>
+            </div>
+            <div class="build-item">
+              <div class="build-item-header">
+                <span class="build-num">02</span>
+                <span class="build-title">Backend & APIs</span>
+              </div>
+              <div class="build-desc">FastAPI<br>REST APIs<br>PostgreSQL<br>Application architecture</div>
+            </div>
+            <div class="build-item">
+              <div class="build-item-header">
+                <span class="build-num">03</span>
+                <span class="build-title">AI & GenAI Systems</span>
+              </div>
+              <div class="build-desc">RAG<br>LLMs<br>Generative AI<br>Computer Vision</div>
+            </div>
+            <div class="build-item">
+              <div class="build-item-header">
+                <span class="build-num">04</span>
+                <span class="build-title">Cloud & Systems</span>
+              </div>
+              <div class="build-desc">AWS<br>Azure<br>Cloud architecture<br>Deployment & infrastructure</div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="scroll-indicator reveal">
