@@ -673,6 +673,68 @@
       border-color: rgba(77,168,218,0.3);
     }
 
+    /* ─── ACHIEVEMENTS ─── */
+    #achievements { background: linear-gradient(180deg, var(--navy) 0%, var(--navy2) 100%); }
+    .ach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      width: 100%;
+    }
+    .ach-col-title {
+      font-family: 'Fira Code', monospace;
+      color: var(--blue);
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .ach-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .ach-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(77,168,218,0.08);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    .ach-item:hover {
+      border-color: rgba(77,168,218,0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(77,168,218,0.05);
+    }
+    .ach-num {
+      font-family: 'Fira Code', monospace;
+      color: var(--blue);
+      font-size: 0.85rem;
+      font-weight: 600;
+      opacity: 0.9;
+      padding-top: 3px;
+    }
+    .ach-content { flex: 1; }
+    .ach-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .ach-desc {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+    .reveal.delay-5 { transition-delay: 500ms; }
+    .reveal.delay-6 { transition-delay: 600ms; }
+
     /* ─── CONTACT ─── */
     #contact {
       background: linear-gradient(180deg, var(--navy2) 0%, var(--navy) 100%);
@@ -758,6 +820,7 @@
       .exp-header { flex-direction: column; align-items: flex-start; }
       .exp-meta { text-align: left; }
       .projects-grid { grid-template-columns: 1fr; }
+      .ach-grid { grid-template-columns: 1fr; gap: 40px; }
       .skills-grid { grid-template-columns: 1fr; }
       .skills-header { flex-direction: column; align-items: flex-start; gap: 20px; }
       #cursor, #cursor-ring { display: none; }
@@ -785,6 +848,7 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#achievements">Achievements</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -1093,7 +1157,118 @@
 
     </section>
 
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements">
+      <div class="section-tag reveal">05. achievements</div>
+      <div class="section-title reveal" style="margin-bottom:16px;">Achievements & Certifications</div>
+      <p class="reveal" style="color:var(--gray);font-size:0.88rem;max-width:380px;line-height:1.7;margin-bottom:48px;">Milestones, recognition, and certifications I've earned along the way.</p>
 
+      <div class="ach-grid">
+        <!-- LEFT COLUMN -->
+        <div>
+          <div class="ach-col-title reveal delay-1">Achievements</div>
+          <div class="ach-list">
+            
+            <div class="ach-item reveal delay-1">
+              <div class="ach-num">01</div>
+              <div class="ach-content">
+                <div class="ach-title">LinkedIn CoachIn ’26</div>
+                <div class="ach-desc">Selected among 100 mentees nationwide for the six-month mentorship program.</div>
+              </div>
+            </div>
+
+            <div class="ach-item reveal delay-2">
+              <div class="ach-num">02</div>
+              <div class="ach-content">
+                <div class="ach-title">LinkedIn CoachIn Hackathon 2026</div>
+                <div class="ach-desc">Winner of the Moonshot Category.</div>
+              </div>
+            </div>
+
+            <div class="ach-item reveal delay-3">
+              <div class="ach-num">03</div>
+              <div class="ach-content">
+                <div class="ach-title">Smart India Hackathon</div>
+                <div class="ach-desc">Qualified for the SIH Internal Round.</div>
+              </div>
+            </div>
+
+            <div class="ach-item reveal delay-4">
+              <div class="ach-num">04</div>
+              <div class="ach-content">
+                <div class="ach-title">Academic Excellence Award</div>
+                <div class="ach-desc">Secured 3rd rank in Class 12.</div>
+              </div>
+            </div>
+
+            <div class="ach-item reveal delay-5">
+              <div class="ach-num">05</div>
+              <div class="ach-content">
+                <div class="ach-title">School Sports Captain</div>
+                <div class="ach-desc">Served as School Sports Captain at The Heritage School, Dehradun.</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div>
+          <div class="ach-col-title reveal delay-2">Certifications & Training</div>
+          <div class="ach-list">
+
+            <div class="ach-item reveal delay-1">
+              <div class="ach-num">01</div>
+              <div class="ach-content">
+                <div class="ach-title">Ubuntu Linux Professional Certificate</div>
+                <div class="ach-desc">Canonical · Jul 2026</div>
+              </div>
+            </div>
+
+            <div class="ach-item reveal delay-2">
+              <div class="ach-num">02</div>
+              <div class="ach-content">
+                <div class="ach-title">Well-Architected Proficient</div>
+                <div class="ach-desc">AWS · Dec 2025</div>
+              </div>
+            </div>
+
+            <div class="ach-item reveal delay-3">
+              <div class="ach-num">03</div>
+              <div class="ach-content">
+                <div class="ach-title">AWS Cloud Quest: Cloud Practitioner — Training Badge</div>
+                <div class="ach-desc">AWS · Oct 2025</div>
+              </div>
+            </div>
+
+            <div class="ach-item reveal delay-4">
+              <div class="ach-num">04</div>
+              <div class="ach-content">
+                <div class="ach-title">AWS Knowledge: Cloud Essentials — Training Badge</div>
+                <div class="ach-desc">AWS · Oct 2025</div>
+              </div>
+            </div>
+
+            <div class="ach-item reveal delay-5">
+              <div class="ach-num">05</div>
+              <div class="ach-content">
+                <div class="ach-title">Microsoft Certified: Azure AI Fundamentals</div>
+                <div class="ach-desc">Sep 2025</div>
+              </div>
+            </div>
+
+            <div class="ach-item reveal delay-6">
+              <div class="ach-num">06</div>
+              <div class="ach-content">
+                <div class="ach-title">Artificial Intelligence Industrial Program & Internship</div>
+                <div class="ach-desc">Personifwy · Sep 2025</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- CONTACT -->
     <section id="contact">
