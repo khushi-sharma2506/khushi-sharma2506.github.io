@@ -370,6 +370,147 @@
       line-height: 1.6;
     }
 
+    /* ─── PROJECTS ─── */
+    #projects { background: var(--navy); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 40px;
+    }
+    .project-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(77,168,218,0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .project-card.featured, .project-card.wide {
+      grid-column: 1 / -1;
+    }
+    @media (min-width: 900px) {
+      .project-card.featured {
+        flex-direction: row;
+        align-items: stretch;
+      }
+      .project-card.featured .project-visual {
+        width: 55%;
+        border-bottom: none;
+        border-right: 1px solid rgba(255,255,255,0.05);
+      }
+      .project-card.featured .project-info {
+        width: 45%;
+        justify-content: center;
+      }
+    }
+    .project-card:hover {
+      border-color: rgba(77,168,218,0.4);
+      box-shadow: 0 10px 40px rgba(77,168,218,0.05);
+    }
+    .project-visual {
+      height: 260px;
+      background: rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .placeholder-content {
+      text-align: center;
+      color: rgba(139,148,158,0.5);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      transition: transform 0.4s ease-out;
+    }
+    .project-card:hover .placeholder-content {
+      transform: scale(1.02);
+      color: rgba(77,168,218,0.8);
+    }
+    .project-info {
+      padding: 32px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .project-category {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .project-featured-label {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.65rem;
+      padding: 4px 10px;
+      background: rgba(77,168,218,0.1);
+      color: var(--blue);
+      border-radius: 4px;
+      letter-spacing: 1px;
+    }
+    .project-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .tech-tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
+      color: var(--gray);
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 4px;
+    }
+    .project-links {
+      display: flex;
+      gap: 20px;
+    }
+    .btn-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .btn-link:hover {
+      color: var(--blue);
+    }
+    .btn-link svg {
+      transition: transform 0.2s;
+    }
+    .project-card:hover .btn-link svg {
+      transform: translateX(3px) translateY(-3px);
+    }
+
     /* ─── SKILLS ─── */
     #skills { background: var(--navy); }
     .skills-header { 
@@ -537,6 +678,7 @@
       .hero { padding: 0 5vw; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .build-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
       .skills-header { flex-direction: column; align-items: flex-start; gap: 20px; }
       #cursor, #cursor-ring { display: none; }
@@ -561,6 +703,7 @@
     <div class="logo">Khushi Sharma</div>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -651,9 +794,149 @@
       </div>
     </section>
 
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-tag reveal">02. projects</div>
+      <div class="section-title reveal" style="margin-bottom:16px;">Projects I've built.</div>
+      <p class="reveal" style="color:var(--gray);font-size:0.88rem;max-width:380px;line-height:1.7;margin-bottom:64px;">A mix of software, AI, and intelligent systems built from ideas into working products.</p>
+
+      <div class="projects-grid">
+        
+        <!-- REPOPILOT -->
+        <div class="project-card featured reveal">
+          <div class="project-visual">
+            <div class="placeholder-content">
+              <div style="font-size: 2rem; margin-bottom: 8px;">🖼️</div>
+              <div>[ INSERT REPOPILOT SCREENSHOT HERE ]</div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-meta">
+              <span class="project-category">GenAI · Full-Stack</span>
+              <span class="project-featured-label">FEATURED</span>
+            </div>
+            <h3 class="project-title">RepoPilot</h3>
+            <div style="color:var(--white);font-weight:600;font-size:0.85rem;margin-bottom:16px;">AI-Powered GitHub Demo Video Studio</div>
+            <p class="project-desc">An AI-powered platform that turns a GitHub repository into a polished project showcase with generated demo scripts, presentation assets, and narrated videos.</p>
+            <div class="project-tech">
+              <span class="tech-tag">Next.js</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Gemini</span>
+              <span class="tech-tag">Remotion</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Supabase</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Tailwind</span>
+            </div>
+            <div class="project-links">
+              <a href="https://repo-pilot-nine-nu.vercel.app/" target="_blank" class="btn-link">Live Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
+              <!-- UPDATE GITHUB LINK HERE -->
+              <a href="#" target="_blank" class="btn-link">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CANVASAI -->
+        <div class="project-card reveal">
+          <div class="project-visual">
+            <div class="placeholder-content">
+              <div style="font-size: 2rem; margin-bottom: 8px;">🖼️</div>
+              <div>[ INSERT CANVASAI SCREENSHOT HERE ]</div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-meta">
+              <span class="project-category">AI · Multimodal</span>
+            </div>
+            <h3 class="project-title">CanvasAI</h3>
+            <div style="color:var(--white);font-weight:600;font-size:0.85rem;margin-bottom:16px;">Multi-Agent Visual Learning</div>
+            <p class="project-desc">An intelligent learning assistant combining visual understanding, retrieval, and multi-agent workflows to create a more interactive learning experience.</p>
+            <div class="project-tech">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">LangGraph</span>
+              <span class="tech-tag">RAG</span>
+              <span class="tech-tag">Hugging Face</span>
+              <span class="tech-tag">Computer Vision</span>
+            </div>
+            <div style="flex:1"></div>
+            <div class="project-links">
+              <!-- UPDATE GITHUB LINK HERE -->
+              <a href="#" target="_blank" class="btn-link">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- DEEPTRACE -->
+        <div class="project-card reveal">
+          <div class="project-visual">
+            <div class="placeholder-content">
+              <div style="font-size: 2rem; margin-bottom: 8px;">🖼️</div>
+              <div>[ INSERT DEEPTRACE SCREENSHOT HERE ]</div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-meta">
+              <span class="project-category">Computer Vision</span>
+            </div>
+            <h3 class="project-title">DeepTrace</h3>
+            <div style="color:var(--white);font-weight:600;font-size:0.85rem;margin-bottom:16px;">Deepfake Detection System</div>
+            <p class="project-desc">A computer vision and deep learning system designed to identify manipulated visual content.</p>
+            <div class="project-tech">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Deep Learning</span>
+              <span class="tech-tag">OpenCV</span>
+              <span class="tech-tag">Computer Vision</span>
+            </div>
+            <div style="flex:1"></div>
+            <div class="project-links">
+              <!-- UPDATE GITHUB LINK HERE -->
+              <a href="#" target="_blank" class="btn-link">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- MARKET SENTIMENT PREDICTOR -->
+        <div class="project-card wide reveal">
+          <div class="project-visual">
+            <div class="placeholder-content">
+              <div style="font-size: 2rem; margin-bottom: 8px;">🖼️</div>
+              <div>[ INSERT MARKET SENTIMENT SCREENSHOT HERE ]</div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-meta">
+              <span class="project-category">NLP · Machine Learning</span>
+            </div>
+            <h3 class="project-title">Market Sentiment Predictor</h3>
+            <div style="color:var(--white);font-weight:600;font-size:0.85rem;margin-bottom:16px;">NLP-Based Market Sentiment Analysis</div>
+            <p class="project-desc">An NLP and machine learning system that analyzes market-related text and predicts sentiment to identify useful trends.</p>
+            <div class="project-tech">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">NLP</span>
+              <span class="tech-tag">Machine Learning</span>
+              <span class="tech-tag">Scikit-learn</span>
+              <span class="tech-tag">Pandas</span>
+              <span class="tech-tag">NumPy</span>
+            </div>
+            <div class="project-links">
+              <!-- UPDATE GITHUB LINK HERE -->
+              <a href="#" target="_blank" class="btn-link">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="scroll-indicator reveal">
+        <span>scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
     <!-- SKILLS -->
     <section id="skills">
-      <div class="section-tag reveal">02. skills</div>
+      <div class="section-tag reveal">03. skills</div>
       <div class="skills-header reveal">
         <div class="section-title" style="margin-bottom:0; line-height: 1.1;">Tech I<br>work <span style="font-style:italic;color:var(--blue)">with</span></div>
         <p style="color:var(--gray);font-size:0.88rem;max-width:320px;line-height:1.7;">Tools I've used across projects, coursework, and personal work.</p>
@@ -716,7 +999,7 @@
 
     <!-- CONTACT -->
     <section id="contact">
-      <div class="section-tag reveal">03. contact</div>
+      <div class="section-tag reveal">04. contact</div>
       <div class="section-title reveal">Get In Touch</div>
       <p class="contact-sub reveal">Always open to interesting conversations, collaborations, or opportunities.</p>
       <div class="contact-links reveal">
