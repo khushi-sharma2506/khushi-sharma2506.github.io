@@ -20,7 +20,8 @@
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
     html { 
-      scroll-behavior: smooth; 
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
     }
 
     body {
@@ -105,19 +106,21 @@
       background: var(--blue);
       transition: width 0.3s;
     }
-    .nav-links a:hover { color: var(--blue); }
-    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; background: var(--blue); }
 
     /* ─── SECTIONS WRAPPER ─── */
     main { position: relative; z-index: 1; }
 
     /* ─── HERO ─── */
     .hero {
-      min-height: 88vh;
+      min-height: 100vh;
       display: flex; flex-direction: column;
       justify-content: center; align-items: flex-start;
       padding: 0 8vw;
       position: relative;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
     }
     .hero-eyebrow {
       font-family: 'Fira Code', monospace;
@@ -265,8 +268,14 @@
 
     /* ─── SECTIONS ─── */
     section {
-      padding: 80px 8vw;
+      min-height: 100vh;
+      padding: 80px 8vw 40px;
       position: relative;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .section-tag {
       font-family: 'Fira Code', monospace;
@@ -719,10 +728,12 @@
 
     /* ─── MOBILE ─── */
     @media (max-width: 768px) {
+      html { scroll-snap-type: none; }
       nav { padding: 16px 5vw; }
       .nav-links { display: none; }
-      section { padding: 80px 5vw; }
-      .hero { padding: 0 5vw; }
+      section, .hero { min-height: auto; scroll-snap-align: none; }
+      section { padding: 100px 5vw 60px; }
+      .hero { padding: 120px 5vw 80px; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .build-grid { grid-template-columns: 1fr; }
       .exp-grid { grid-template-columns: 1fr; }
@@ -839,10 +850,7 @@
           </div>
         </div>
       </div>
-      <div class="scroll-indicator reveal">
-        <span>scroll</span>
-        <div class="scroll-line"></div>
-      </div>
+
     </section>
 
     <!-- EXPERIENCE -->
@@ -897,10 +905,7 @@
         </div>
       </div>
 
-      <div class="scroll-indicator reveal">
-        <span>scroll</span>
-        <div class="scroll-line"></div>
-      </div>
+
     </section>
 
     <!-- PROJECTS -->
@@ -1012,10 +1017,7 @@
 
       </div>
       
-      <div class="scroll-indicator reveal">
-        <span>scroll</span>
-        <div class="scroll-line"></div>
-      </div>
+
     </section>
 
     <!-- SKILLS -->
@@ -1073,10 +1075,7 @@
           </div>
         </div>
       </div>
-      <div class="scroll-indicator reveal">
-        <span>scroll</span>
-        <div class="scroll-line"></div>
-      </div>
+
     </section>
 
 
@@ -1210,10 +1209,34 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // ─── NAV SCROLL ───
+    // ─── NAV SCROLL & ACTIVE STATE ───
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const scrollIndicator = document.querySelector('.hero .scroll-indicator');
+
     window.addEventListener('scroll', () => {
-      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+      const y = window.scrollY;
+      document.getElementById('navbar').classList.toggle('scrolled', y > 50);
+      
+      if (scrollIndicator) {
+        scrollIndicator.style.opacity = Math.max(0, 1 - y / 250);
+      }
     });
+
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          let id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (id && link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    document.querySelectorAll('section').forEach(sec => sectionObserver.observe(sec));
   </script>
 </body>
 </html>
