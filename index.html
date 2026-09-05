@@ -862,52 +862,59 @@
 
     <!-- ABOUT -->
     <section id="about">
-      <div class="section-tag reveal">01. about</div>
-      <div class="section-title reveal">About Me</div>
-      <div class="about-grid">
-        <div class="about-text reveal">
-          <p>I'm a Computer Science student specializing in <strong>AI & ML</strong>. I'm interested in building practical AI systems and understanding what happens behind them.</p>
-          <p>I've worked across full-stack development, backend systems, machine learning, Generative AI, RAG pipelines, and computer vision.</p>
-          <p>I enjoy working on projects where I can take an idea from a concept to something people can <strong>actually use</strong>.</p>
-          
-          <div style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 24px;">
-            <h4 style="font-family:'Fira Code',monospace;color:var(--gray);font-size:0.75rem;letter-spacing:2px;margin-bottom:12px;text-transform:uppercase;">Education</h4>
-            <div style="font-weight:600;font-size:1.05rem;margin-bottom:4px;color:var(--white);">B.Tech — CSE (AI & ML)</div>
-            <div style="color:var(--blue);font-size:0.9rem;margin-bottom:4px;">Graphic Era University, Dehradun</div>
-            <div style="color:var(--gray);font-family:'Fira Code',monospace;font-size:0.8rem;">2024 — 2028</div>
+      <canvas id="about-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></canvas>
+      <div style="position: relative; z-index: 1; width: 100%; display: flex; flex-direction: column;">
+        <div class="section-tag reveal">01. about</div>
+        <div class="section-title reveal">About Me</div>
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <p>I'm a Computer Science student specializing in <strong>AI & ML</strong>. I'm interested in building practical AI systems and understanding what happens behind them.</p>
+            <p>I've worked across full-stack development, backend systems, machine learning, Generative AI, RAG pipelines, and computer vision.</p>
+            <p>I enjoy working on projects where I can take an idea from a concept to something people can <strong>actually use</strong>.</p>
+            
+            <div style="margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 16px;">
+              <h4 style="font-family:'Fira Code',monospace;color:var(--gray);font-size:0.75rem;letter-spacing:1px;margin-bottom:8px;text-transform:uppercase;">Education</h4>
+              <div style="font-weight:600;font-size:1.05rem;margin-bottom:2px;color:var(--white);">B.Tech — CSE (AI & ML)</div>
+              <div style="color:var(--blue);font-size:0.85rem;margin-bottom:2px;">Graphic Era University, Dehradun</div>
+              <div style="color:var(--gray);font-family:'Fira Code',monospace;font-size:0.75rem;">2024 — 2028</div>
+            </div>
+          </div>
+          <div class="currently-box reveal">
+            <h4 style="margin-bottom: 12px;">// what I build</h4>
+            <div class="build-grid">
+              <div class="build-item">
+                <div class="build-item-header">
+                  <span class="build-num">01</span>
+                  <span class="build-title">Full-Stack Applications</span>
+                </div>
+                <div class="build-desc">React / Next.js, TypeScript, Modern web applications</div>
+              </div>
+              <div class="build-item">
+                <div class="build-item-header">
+                  <span class="build-num">02</span>
+                  <span class="build-title">Backend & APIs</span>
+                </div>
+                <div class="build-desc">FastAPI, REST APIs, PostgreSQL, Application architecture</div>
+              </div>
+              <div class="build-item">
+                <div class="build-item-header">
+                  <span class="build-num">03</span>
+                  <span class="build-title">AI & GenAI Systems</span>
+                </div>
+                <div class="build-desc">RAG, LLMs, Generative AI, Computer Vision</div>
+              </div>
+              <div class="build-item">
+                <div class="build-item-header">
+                  <span class="build-num">04</span>
+                  <span class="build-title">Cloud & Systems</span>
+                </div>
+                <div class="build-desc">AWS, Azure, Cloud architecture, Deployment & infrastructure</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="currently-box reveal">
-          <h4>// what I build</h4>
-          <div class="build-grid">
-            <div class="build-item">
-              <div class="build-item-header">
-                <span class="build-num">01</span>
-                <span class="build-title">Full-Stack Applications</span>
-              </div>
-              <div class="build-desc">React / Next.js<br>TypeScript<br>Modern web applications</div>
-            </div>
-            <div class="build-item">
-              <div class="build-item-header">
-                <span class="build-num">02</span>
-                <span class="build-title">Backend & APIs</span>
-              </div>
-              <div class="build-desc">FastAPI<br>REST APIs<br>PostgreSQL<br>Application architecture</div>
-            </div>
-            <div class="build-item">
-              <div class="build-item-header">
-                <span class="build-num">03</span>
-                <span class="build-title">AI & GenAI Systems</span>
-              </div>
-              <div class="build-desc">RAG<br>LLMs<br>Generative AI<br>Computer Vision</div>
-            </div>
-            <div class="build-item">
-              <div class="build-item-header">
-                <span class="build-num">04</span>
-                <span class="build-title">Cloud & Systems</span>
-              </div>
-              <div class="build-desc">AWS<br>Azure<br>Cloud architecture<br>Deployment & infrastructure</div>
-            </div>
+      </div>
+    </section>
           </div>
         </div>
       </div>
@@ -1406,6 +1413,73 @@
     }, { threshold: 0.5 });
     
     document.querySelectorAll('section').forEach(sec => sectionObserver.observe(sec));
+
+    // ─── ABOUT SECTION DYNAMIC BACKGROUND ───
+    const aboutCanvas = document.getElementById('about-canvas');
+    const aboutCtx = aboutCanvas.getContext('2d');
+    let aboutNodes = [];
+
+    function resizeAbout() {
+      const section = document.getElementById('about');
+      aboutCanvas.width = section.clientWidth;
+      aboutCanvas.height = section.clientHeight;
+    }
+    resizeAbout();
+    window.addEventListener('resize', resizeAbout);
+
+    class AboutNode {
+      constructor() {
+        this.x = Math.random() * aboutCanvas.width;
+        this.y = Math.random() * aboutCanvas.height;
+        this.vx = (Math.random() - 0.5) * 0.2;
+        this.vy = (Math.random() - 0.5) * 0.2;
+        this.radius = Math.random() * 1.5 + 0.5;
+        this.baseAlpha = Math.random() * 0.3 + 0.1;
+        this.pulsePhase = Math.random() * Math.PI * 2;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.pulsePhase += 0.01;
+        if (this.x < 0 || this.x > aboutCanvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > aboutCanvas.height) this.vy *= -1;
+      }
+      draw() {
+        const currentAlpha = this.baseAlpha * (0.8 + 0.5 * Math.sin(this.pulsePhase));
+        aboutCtx.beginPath();
+        aboutCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        aboutCtx.fillStyle = `rgba(77,168,218,${currentAlpha})`;
+        aboutCtx.fill();
+      }
+    }
+
+    for (let i = 0; i < 60; i++) aboutNodes.push(new AboutNode());
+
+    function animateAbout() {
+      aboutCtx.clearRect(0, 0, aboutCanvas.width, aboutCanvas.height);
+      
+      aboutNodes.forEach((node, i) => {
+        aboutNodes.slice(i + 1).forEach(other => {
+          const dx = node.x - other.x;
+          const dy = node.y - other.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < 150) {
+            aboutCtx.beginPath();
+            aboutCtx.moveTo(node.x, node.y);
+            aboutCtx.lineTo(other.x, other.y);
+            aboutCtx.strokeStyle = `rgba(77,168,218,${0.04 * (1 - dist / 150)})`;
+            aboutCtx.lineWidth = 0.5;
+            aboutCtx.stroke();
+          }
+        });
+        node.update();
+        node.draw();
+      });
+      requestAnimationFrame(animateAbout);
+    }
+    animateAbout();
+
   </script>
 </body>
 </html>
