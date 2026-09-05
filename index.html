@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Khushi Sharma</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #001A30;
+      --navy-light: #002a4a;
+      --blue: #4DA8DA;
+      --white: #FFFFFF;
+      --gray: #A0A0A0;
+      --accent: #CC0000;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; width: 100%;
+      padding: 18px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,26,48,0.92);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+      border-bottom: 1px solid rgba(77,168,218,0.15);
+    }
+    .logo {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.1rem;
+      color: var(--blue);
+      letter-spacing: 2px;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .nav-links a:hover { color: var(--blue); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 10vw;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(77,168,218,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      font-family: 'Fira Code', monospace;
+      color: var(--blue);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--blue); }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .hero-quote {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      color: rgba(77,168,218,0.6);
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn {
+      padding: 12px 28px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: var(--navy);
+      border: 2px solid var(--blue);
+    }
+    .btn-primary:hover { background: transparent; color: var(--blue); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* SECTIONS */
+    section { padding: 100px 10vw; }
+    .section-label {
+      font-family: 'Fira Code', monospace;
+      color: var(--blue);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 48px;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 50px; height: 3px;
+      background: var(--blue);
+      margin-top: 10px;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+    .about-text p strong { color: var(--white); }
+    .about-focus h4 {
+      color: var(--blue);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .focus-list { list-style: none; }
+    .focus-list li {
+      color: var(--gray);
+      padding: 8px 0;
+      font-size: 0.95rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .focus-list li::before {
+      content: '▶';
+      color: var(--blue);
+      font-size: 0.6rem;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .skill-card {
+      background: var(--navy-light);
+      border: 1px solid rgba(77,168,218,0.12);
+      border-radius: 8px;
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .skill-card:hover {
+      border-color: rgba(77,168,218,0.4);
+      transform: translateY(-4px);
+    }
+    .skill-card h4 {
+      font-family: 'Fira Code', monospace;
+      color: var(--blue);
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      background: rgba(77,168,218,0.08);
+      color: var(--gray);
+      padding: 5px 12px;
+      border-radius: 3px;
+      font-size: 0.82rem;
+      font-family: 'Fira Code', monospace;
+      border: 1px solid rgba(77,168,218,0.15);
+    }
+
+    /* CONTACT */
+    .contact-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 32px;
+    }
+    .contact-wrapper p {
+      color: var(--gray);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+    .contact-links { display: flex; gap: 20px; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 12px 24px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .contact-link:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+    .contact-link img { width: 22px; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 32px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      color: rgba(160,160,160,0.5);
+      font-size: 0.8rem;
+      font-family: 'Fira Code', monospace;
+    }
+    footer span { color: var(--blue); }
+
+    /* DIVIDER */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(77,168,218,0.2), transparent);
+      margin: 0 10vw;
+      width: 80vw;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      section { padding: 80px 6vw; }
+      .hero { padding: 0 6vw; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">ks.dev</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">> hello, world</div>
+    <h1>Khushi <span>Sharma</span></h1>
+    <p class="hero-sub">
+      Computer Science student specializing in <strong>AI & ML</strong>. I build practical AI systems — from LLMs and RAG pipelines to full-stack applications.
+    </p>
+    <p class="hero-quote">
+      "It doesn't matter what happened yesterday. You have to focus on what you can do today." — Max Verstappen 🏁
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="https://github.com/khushi-sharma2506" target="_blank" class="btn btn-outline">GitHub ↗</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">// 01. about</div>
+    <div class="section-title">About Me</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a Computer Science student specializing in <strong>AI & ML</strong>. I'm interested in building practical AI systems and understanding what happens behind them.</p>
+        <p>I've worked on <strong>machine learning and deep learning projects</strong>, generative AI applications, and backend/cloud systems.</p>
+        <p>I enjoy working on projects where I can take an idea from a concept to something people can actually use.</p>
+      </div>
+      <div class="about-focus">
+        <h4>// Currently exploring</h4>
+        <ul class="focus-list">
+          <li>Large Language Models (LLMs)</li>
+          <li>Deep Learning & Neural Networks</li>
+          <li>AI Inference & Optimization</li>
+          <li>System Design</li>
+          <li>RAG Pipelines & Generative AI</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">// 02. skills</div>
+    <div class="section-title">Tech Stack</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h4>Languages</h4>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">C++</span>
+          <span class="tag">Java</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>AI / ML</h4>
+        <div class="skill-tags">
+          <span class="tag">TensorFlow</span>
+          <span class="tag">Keras</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">XGBoost</span>
+          <span class="tag">HuggingFace</span>
+          <span class="tag">OpenCV</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Generative AI</h4>
+        <div class="skill-tags">
+          <span class="tag">Gemini</span>
+          <span class="tag">Ollama</span>
+          <span class="tag">LangChain</span>
+          <span class="tag">LangGraph</span>
+          <span class="tag">RAG</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Web & Backend</h4>
+        <div class="skill-tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">React</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Tailwind CSS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Databases</h4>
+        <div class="skill-tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">Redis</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Cloud & Tools</h4>
+        <div class="skill-tags">
+          <span class="tag">AWS</span>
+          <span class="tag">Azure</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Git</span>
+          <span class="tag">GitHub</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">// 03. contact</div>
+    <div class="section-title">Get In Touch</div>
+    <div class="contact-wrapper">
+      <p>I'm always open to interesting conversations, collaborations, or opportunities. Feel free to reach out!</p>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/khushi-sharma-ks25" target="_blank" class="contact-link">
+          <img src="https://img.icons8.com/color/48/linkedin-circled--v1.png" alt="LinkedIn"/>
+          LinkedIn
+        </a>
+        <a href="mailto:khushisharma0300825@gmail.com" class="contact-link">
+          <img src="https://img.icons8.com/color/48/gmail-new.png" alt="Gmail"/>
+          Email
+        </a>
+        <a href="https://github.com/khushi-sharma2506" target="_blank" class="contact-link">
+          <img src="https://img.icons8.com/ios-filled/48/ffffff/github.png" alt="GitHub"/>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Built by <span>Khushi Sharma</span> · <span>"Simply lovely!"</span> 🏁</p>
+  </footer>
+
+</body>
+</html>
