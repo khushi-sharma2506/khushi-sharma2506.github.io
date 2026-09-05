@@ -462,9 +462,10 @@
     #projects { background: var(--navy); }
     .projects-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      margin-top: 40px;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 20px;
+      margin-top: 10px;
     }
     .project-card {
       background: rgba(255,255,255,0.02);
@@ -476,8 +477,21 @@
       transition: all 0.3s ease;
       position: relative;
     }
-    .project-card.featured, .project-card.wide {
-      grid-column: 1 / -1;
+    .project-card.featured {
+      grid-column: 1 / 2;
+      grid-row: 1 / 3;
+    }
+    .card-canvas {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+    }
+    .card-deeptrace {
+      grid-column: 3 / 4;
+      grid-row: 1 / 2;
+    }
+    .project-card.wide {
+      grid-column: 2 / 4;
+      grid-row: 2 / 3;
     }
     @media (min-width: 900px) {
       .project-card.featured .project-info {
@@ -487,12 +501,16 @@
     .project-card:hover {
       border-color: rgba(77,168,218,0.4);
       box-shadow: 0 10px 40px rgba(77,168,218,0.05);
+      transform: scale(1.02);
     }
     .project-info {
-      padding: 32px;
+      padding: 24px;
       flex: 1;
       display: flex;
       flex-direction: column;
+    }
+    .project-card.featured .project-info {
+      padding: 32px;
     }
     .project-meta {
       display: flex;
@@ -917,7 +935,7 @@
       <div class="projects-grid">
         
         <!-- REPOPILOT -->
-        <div class="project-card featured reveal">
+        <div class="project-card featured card-repopilot reveal delay-1">
           <div class="project-info">
             <div class="project-meta">
               <span class="project-category">GenAI · Full-Stack</span>
@@ -945,7 +963,7 @@
         </div>
 
         <!-- CANVASAI -->
-        <div class="project-card reveal">
+        <div class="project-card card-canvas reveal delay-2">
           <div class="project-info">
             <div class="project-meta">
               <span class="project-category">AI · Multimodal</span>
@@ -962,14 +980,13 @@
             </div>
             <div style="flex:1"></div>
             <div class="project-links">
-              <!-- UPDATE GITHUB LINK HERE -->
-              <a href="#" target="_blank" class="btn-link">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
+              <a href="https://github.com/khushi-sharma2506/CanvasAI.git" target="_blank" class="btn-link">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
             </div>
           </div>
         </div>
 
         <!-- DEEPTRACE -->
-        <div class="project-card reveal">
+        <div class="project-card card-deeptrace reveal delay-3">
           <div class="project-info">
             <div class="project-meta">
               <span class="project-category">Computer Vision</span>
@@ -985,14 +1002,13 @@
             </div>
             <div style="flex:1"></div>
             <div class="project-links">
-              <!-- UPDATE GITHUB LINK HERE -->
-              <a href="#" target="_blank" class="btn-link">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
+              <a href="https://github.com/khushi-sharma2506/Deep-Trace.git" target="_blank" class="btn-link">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
             </div>
           </div>
         </div>
 
         <!-- MARKET SENTIMENT PREDICTOR -->
-        <div class="project-card wide reveal">
+        <div class="project-card wide card-market reveal delay-4">
           <div class="project-info">
             <div class="project-meta">
               <span class="project-category">NLP · Machine Learning</span>
@@ -1009,8 +1025,7 @@
               <span class="tech-tag">NumPy</span>
             </div>
             <div class="project-links">
-              <!-- UPDATE GITHUB LINK HERE -->
-              <a href="#" target="_blank" class="btn-link">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
+              <a href="https://github.com/khushi-sharma2506/Market-Sentiment-and-Stock-Direction-Predictor.git" target="_blank" class="btn-link">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
             </div>
           </div>
         </div>
