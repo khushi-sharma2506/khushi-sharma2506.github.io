@@ -338,7 +338,12 @@
 
     /* ─── SKILLS ─── */
     #skills { background: var(--navy); }
-    .skills-header { margin-bottom: 52px; }
+    .skills-header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: flex-end; 
+      margin-bottom: 64px; 
+    }
     .skills-table { width: 100%; }
     .skill-row {
       display: grid;
@@ -498,6 +503,7 @@
       .hero { padding: 0 5vw; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .skills-grid { grid-template-columns: 1fr; }
+      .skills-header { flex-direction: column; align-items: flex-start; gap: 20px; }
       #cursor, #cursor-ring { display: none; }
       body { cursor: auto; }
     }
@@ -577,8 +583,8 @@
     <section id="skills">
       <div class="section-tag reveal">02. skills</div>
       <div class="skills-header reveal">
-        <div class="section-title" style="margin-bottom:16px;">What I work <span style="color:var(--blue)">with.</span></div>
-        <p style="color:var(--gray);font-size:0.88rem;max-width:320px;line-height:1.7;">A mix of languages, frameworks, and tools across AI/ML, web, cloud, and databases. Still adding to this list every month.</p>
+        <div class="section-title" style="margin-bottom:0; line-height: 1.1;">Tech I<br>work <span style="font-style:italic;color:var(--blue)">with</span></div>
+        <p style="color:var(--gray);font-size:0.88rem;max-width:320px;line-height:1.7;">Tools I've used across projects, coursework, and personal work.</p>
       </div>
       <div class="skills-table reveal">
         <div class="skill-row">
