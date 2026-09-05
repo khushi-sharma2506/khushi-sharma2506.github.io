@@ -7,11 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --navy: #020d18;
-      --navy2: #041428;
-      --blue: #4DA8DA;
-      --blue-dim: rgba(77,168,218,0.15);
-      --blue-glow: rgba(77,168,218,0.4);
+      --navy: #050505;
+      --navy2: #0a0a0a;
+      --blue: #00e5ff;
+      --blue-dim: rgba(0, 229, 255, 0.15);
+      --blue-glow: rgba(0, 229, 255, 0.4);
       --white: #f0f6fc;
       --gray: #8b949e;
       --red: #CC0000;
@@ -46,7 +46,7 @@
     #cursor-ring {
       position: fixed;
       width: 40px; height: 40px;
-      border: 1.5px solid rgba(77,168,218,0.5);
+      border: 1.5px solid rgba(0, 229, 255, 0.5);
       border-radius: 50%;
       pointer-events: none;
       z-index: 9998;
@@ -72,7 +72,7 @@
       display: flex; justify-content: space-between; align-items: center;
       background: rgba(2,13,24,0.8);
       backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(77,168,218,0.08);
+      border-bottom: 1px solid rgba(0,229,255,0.08);
       z-index: 100;
       transition: padding 0.3s;
     }
@@ -155,7 +155,7 @@
     .hero-quote {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.78rem;
-      color: rgba(77,168,218,0.5);
+      color: rgba(0, 229, 255, 0.5);
       margin-bottom: 44px;
       font-style: italic;
       opacity: 0;
@@ -192,10 +192,10 @@
       background: var(--blue);
       color: var(--navy);
       border: 2px solid var(--blue);
-      box-shadow: 0 0 20px rgba(77,168,218,0.3);
+      box-shadow: 0 0 20px rgba(0,229,255,0.3);
     }
     .btn-primary:hover {
-      box-shadow: 0 0 40px rgba(77,168,218,0.5);
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.5);
       transform: translateY(-2px);
     }
     .btn-ghost {
@@ -240,27 +240,41 @@
     }
 
     /* Glow orb */
+    .bg-mesh {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(80px);
+      filter: blur(100px);
       pointer-events: none;
     }
     .orb-1 {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(77,168,218,0.06) 0%, transparent 70%);
-      top: 10%; right: -10%;
-      animation: orb-float 8s ease-in-out infinite;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,229,255,0.05) 0%, transparent 60%);
+      top: -10%; right: -5%;
+      animation: orb-float 15s ease-in-out infinite;
     }
     .orb-2 {
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(204,0,0,0.04) 0%, transparent 70%);
-      bottom: 20%; left: -5%;
-      animation: orb-float 10s ease-in-out infinite reverse;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0, 100, 255, 0.04) 0%, transparent 60%);
+      bottom: -10%; left: -10%;
+      animation: orb-float 20s ease-in-out infinite reverse;
+    }
+    .orb-3 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(204,0,255,0.03) 0%, transparent 60%);
+      top: 40%; left: 30%;
+      animation: orb-float 18s ease-in-out infinite 2s;
     }
     @keyframes orb-float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-30px); }
+      0%, 100% { transform: translate(0px, 0px) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
     }
 
     /* ─── SECTIONS ─── */
@@ -305,7 +319,6 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ─── ABOUT ─── */
-    #about { background: linear-gradient(180deg, var(--navy) 0%, var(--navy2) 100%); }
     .about-grid {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
@@ -319,8 +332,8 @@
     }
     .about-text p strong { color: var(--white); }
     .currently-box {
-      background: rgba(77,168,218,0.04);
-      border: 1px solid rgba(77,168,218,0.12);
+      background: rgba(0,229,255,0.04);
+      border: 1px solid rgba(0,229,255,0.12);
       border-radius: 6px;
       padding: 20px;
       backdrop-filter: blur(10px);
@@ -342,12 +355,12 @@
       padding: 20px;
       border: 1px solid rgba(255,255,255,0.05);
       border-radius: 4px;
-      background: rgba(0,0,0,0.15);
+      background: transparent;
       transition: all 0.3s ease;
     }
     .build-item:hover {
-      border-color: rgba(77,168,218,0.3);
-      background: rgba(77,168,218,0.03);
+      border-color: rgba(0,229,255,0.3);
+      background: rgba(0,229,255,0.03);
     }
     .build-item-header {
       display: flex;
@@ -375,9 +388,8 @@
     }
 
     /* ─── EXPERIENCE ─── */
-    #experience { background: linear-gradient(180deg, var(--navy2) 0%, var(--navy) 100%); }
     .exp-card {
-      background: rgba(255,255,255,0.01);
+      background: transparent;
       border: 1px solid rgba(255,255,255,0.05);
       border-radius: 4px;
       padding: 24px;
@@ -386,7 +398,7 @@
     }
     .exp-card:hover {
       border-color: rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.02);
+      background: transparent;
     }
     .exp-header {
       display: flex;
@@ -429,7 +441,7 @@
       margin-bottom: 4px;
     }
     .exp-block {
-      background: rgba(0,0,0,0.15);
+      background: transparent;
       border: 1px solid rgba(255,255,255,0.03);
       border-radius: 6px;
       padding: 16px;
@@ -457,7 +469,6 @@
     .reveal.delay-4 { transition-delay: 400ms; }
 
     /* ─── PROJECTS ─── */
-    #projects { background: var(--navy); }
     .projects-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -465,7 +476,7 @@
       width: 100%;
     }
     .project-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.005) 100%);
+      background: transparent;
       border: 1px solid rgba(255,255,255,0.05);
       border-top: 1px solid rgba(255,255,255,0.15);
       border-radius: 6px;
@@ -476,9 +487,9 @@
       position: relative;
     }
     .project-card.featured {
-      background: linear-gradient(180deg, rgba(77,168,218,0.06) 0%, rgba(77,168,218,0.01) 100%);
-      border-color: rgba(77,168,218,0.15);
-      border-top: 1px solid rgba(77,168,218,0.4);
+      background: radial-gradient(circle at top left, rgba(0,229,255,0.05) 0%, transparent 60%);
+      border-color: rgba(0, 229, 255, 0.15);
+      border-top: 1px solid rgba(0, 229, 255, 0.4);
     }
 
     .project-card:hover {
@@ -508,7 +519,7 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.6rem;
       padding: 3px 8px;
-      background: rgba(77,168,218,0.1);
+      background: rgba(0,229,255,0.1);
       color: var(--blue);
       border-radius: 4px;
       letter-spacing: 1px;
@@ -542,7 +553,7 @@
       margin-bottom: 20px;
     }
     .project-tech span {
-      color: rgba(77,168,218,0.5);
+      color: rgba(0, 229, 255, 0.5);
       margin: 0 4px;
     }
     .project-links {
@@ -572,7 +583,6 @@
     }
 
     /* ─── SKILLS ─── */
-    #skills { background: var(--navy); }
     .skills-header { 
       display: flex; 
       justify-content: space-between; 
@@ -586,10 +596,10 @@
       gap: 40px;
       align-items: start;
       padding: 14px 0;
-      border-top: 1px solid rgba(77,168,218,0.1);
+      border-top: 1px solid rgba(0,229,255,0.1);
       transition: padding 0.2s;
     }
-    .skill-row:last-child { border-bottom: 1px solid rgba(77,168,218,0.1); }
+    .skill-row:last-child { border-bottom: 1px solid rgba(0,229,255,0.1); }
     .skill-row:hover { padding: 14px 14px; }
     .skill-cat {
       font-family: 'JetBrains Mono', monospace;
@@ -605,8 +615,8 @@
       gap: 20px;
     }
     .skill-card {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(77,168,218,0.1);
+      background: transparent;
+      border: 1px solid rgba(0,229,255,0.1);
       border-radius: 6px;
       padding: 28px;
       backdrop-filter: blur(10px);
@@ -624,10 +634,10 @@
       transition: opacity 0.3s;
     }
     .skill-card:hover {
-      border-color: rgba(77,168,218,0.35);
+      border-color: rgba(0,229,255,0.35);
       transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px rgba(77,168,218,0.05);
-      background: rgba(77,168,218,0.04);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px rgba(0,229,255,0.05);
+      background: rgba(0,229,255,0.04);
     }
     .skill-card:hover::before { opacity: 1; }
     .card-icon {
@@ -656,11 +666,10 @@
     .tag:hover {
       background: rgba(255,255,255,0.08);
       color: var(--white);
-      border-color: rgba(77,168,218,0.3);
+      border-color: rgba(0,229,255,0.3);
     }
 
     /* ─── ACHIEVEMENTS ─── */
-    #achievements { background: linear-gradient(180deg, var(--navy) 0%, var(--navy2) 100%); }
     .ach-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -687,7 +696,7 @@
       gap: 12px;
       align-items: flex-start;
       padding: 12px 16px;
-      background: rgba(255,255,255,0.01);
+      background: transparent;
       border: 1px solid rgba(255,255,255,0.05);
       border-radius: 4px;
       transition: all 0.3s ease;
@@ -722,13 +731,9 @@
     .reveal.delay-6 { transition-delay: 600ms; }
 
     /* ─── CONTACT ─── */
-    #contact {
-      background: linear-gradient(180deg, var(--navy2) 0%, var(--navy) 100%);
-      text-align: center;
-    }
+    #contact { text-align: center; }
     #contact .section-tag { justify-content: center; }
     #contact .section-tag::before { display: none; }
-    #contact .section-title { text-align: center; }
     #contact .section-title::after { display: none; }
     .contact-sub {
       color: var(--gray);
@@ -750,21 +755,20 @@
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 4px;
       transition: all 0.25s;
-      background: rgba(255,255,255,0.02);
+      background: transparent;
       backdrop-filter: blur(10px);
     }
     .contact-link:hover {
       border-color: var(--blue);
       color: var(--blue);
-      background: rgba(77,168,218,0.05);
+      background: rgba(0,229,255,0.05);
       transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(77,168,218,0.1);
+      box-shadow: 0 10px 30px rgba(0,229,255,0.1);
     }
     .contact-link img { width: 20px; }
 
     /* ─── FOOTER ─── */
     footer {
-      text-align: center;
       padding: 32px;
       border-top: 1px solid rgba(255,255,255,0.04);
       font-family: 'JetBrains Mono', monospace;
@@ -819,6 +823,13 @@
 </head>
 <body>
 
+  <!-- GLOBAL BG MESH -->
+  <div class="bg-mesh">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
   <!-- Custom Cursor -->
   <div id="cursor"></div>
   <div id="cursor-ring"></div>
@@ -842,8 +853,6 @@
   <main>
     <!-- HERO -->
     <section class="hero">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
 
       <div class="hero-eyebrow">> hello, world</div>
       <h1>
@@ -1291,12 +1300,12 @@
       el.addEventListener('mouseenter', () => {
         cursor.style.transform = 'translate(-50%,-50%) scale(2)';
         ring.style.width = '60px'; ring.style.height = '60px';
-        ring.style.borderColor = 'rgba(77,168,218,0.8)';
+        ring.style.borderColor = 'rgba(0,229,255,0.8)';
       });
       el.addEventListener('mouseleave', () => {
         cursor.style.transform = 'translate(-50%,-50%) scale(1)';
         ring.style.width = '40px'; ring.style.height = '40px';
-        ring.style.borderColor = 'rgba(77,168,218,0.5)';
+        ring.style.borderColor = 'rgba(0, 229, 255, 0.5)';
       });
     });
 
@@ -1333,7 +1342,7 @@
         const op = this.opacity * (0.7 + 0.3 * Math.sin(this.pulse));
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(77,168,218,${op})`;
+        ctx.fillStyle = `rgba(0,229,255,${op})`;
         ctx.fill();
       }
     }
