@@ -32,29 +32,33 @@
       cursor: none;
     }
 
-    /* ─── CUSTOM CURSOR ─── */
-    #cursor {
+    /* ─── GTA-STYLE CURSOR ─── */
+    * { cursor: none !important; }
+
+    #gta-cursor {
       position: fixed;
-      width: 12px; height: 12px;
-      background: var(--blue);
-      border-radius: 50%;
+      top: 0; left: 0;
+      width: 28px; height: 36px;
       pointer-events: none;
       z-index: 9999;
-      transition: transform 0.15s ease;
-      transform: translate(-50%, -50%);
+      transform-origin: 4px 4px;
+      transition: transform 0.08s ease;
+      will-change: transform;
     }
-    #cursor-ring {
-      position: fixed;
-      width: 40px; height: 40px;
-      border: 1.5px solid rgba(0, 229, 255, 0.5);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      transition: transform 0.12s ease, width 0.2s, height 0.2s;
-      transform: translate(-50%, -50%);
+
+    #gta-cursor svg {
+      width: 100%; height: 100%;
+      filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.5));
     }
-    body:hover #cursor { transform: translate(-50%, -50%) scale(1); }
-    a:hover ~ #cursor, button:hover ~ #cursor { transform: translate(-50%, -50%) scale(2); }
+
+    #gta-cursor.hovering svg {
+      filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.9));
+      transform: scale(1.15);
+    }
+
+    #gta-cursor.clicking {
+      transform: scale(0.9);
+    }
 
     /* ─── GRID BACKGROUND ─── */
     #grid-canvas {
@@ -834,8 +838,9 @@
       .ach-grid { grid-template-columns: 1fr; gap: 40px; }
       .skills-grid { grid-template-columns: 1fr; }
       .skills-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-      #cursor, #cursor-ring { display: none; }
-      body { cursor: auto; }
+      #gta-cursor { display: none; }
+      body { cursor: auto !important; }
+      * { cursor: auto !important; }
     }
     @media (max-width: 1024px) {
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
@@ -851,9 +856,20 @@
     <div class="orb orb-3"></div>
   </div>
 
-  <!-- Custom Cursor -->
-  <div id="cursor"></div>
-  <div id="cursor-ring"></div>
+  <!-- GTA-Style Cursor -->
+  <div id="gta-cursor">
+    <svg viewBox="0 0 28 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer black stroke (thick shadow/outline) -->
+      <path d="M4 2L4 30L10.5 23.5L15 32L18.5 30.5L14 22L22 22Z"
+        fill="black" stroke="black" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <!-- White fill arrow -->
+      <path d="M4 2L4 30L10.5 23.5L15 32L18.5 30.5L14 22L22 22Z"
+        fill="white" stroke="white" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <!-- Cyan accent inner highlight -->
+      <path d="M6 5L6 25.5L11 20L15.2 28.5L17 27.5L12.8 19L19.5 19Z"
+        fill="rgba(0,229,255,0.15)"/>
+    </svg>
+  </div>
 
   <!-- Background: Grid + Particles -->
   <canvas id="grid-canvas"></canvas>
@@ -1298,38 +1314,35 @@
   </footer>
 
   <script>
-    // ─── CUSTOM CURSOR ───
-    const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursor-ring');
-    let mx = 0, my = 0, rx = 0, ry = 0;
+    // ─── GTA CURSOR ───
+    const gtaCursor = document.getElementById('gta-cursor');
+    let curX = 0, curY = 0;
+    let targetX = window.innerWidth / 2, targetY = window.innerHeight / 2;
 
     document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      cursor.style.left = mx + 'px';
-      cursor.style.top = my + 'px';
+      targetX = e.clientX;
+      targetY = e.clientY;
     });
 
-    function animateRing() {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.left = rx + 'px';
-      ring.style.top = ry + 'px';
-      requestAnimationFrame(animateRing);
+    // Smooth follow with slight lag for organic feel
+    function animateCursor() {
+      curX += (targetX - curX) * 0.55;
+      curY += (targetY - curY) * 0.55;
+      gtaCursor.style.left = curX + 'px';
+      gtaCursor.style.top = curY + 'px';
+      requestAnimationFrame(animateCursor);
     }
-    animateRing();
+    animateCursor();
 
-    document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'translate(-50%,-50%) scale(2)';
-        ring.style.width = '60px'; ring.style.height = '60px';
-        ring.style.borderColor = 'rgba(0,229,255,0.8)';
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
-        ring.style.width = '40px'; ring.style.height = '40px';
-        ring.style.borderColor = 'rgba(0, 229, 255, 0.5)';
-      });
+    // Hover state: glow brighter
+    document.querySelectorAll('a, button, .project-card, .contact-link, .btn-link').forEach(el => {
+      el.addEventListener('mouseenter', () => gtaCursor.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => gtaCursor.classList.remove('hovering'));
     });
+
+    // Click state: shrink
+    document.addEventListener('mousedown', () => gtaCursor.classList.add('clicking'));
+    document.addEventListener('mouseup', () => gtaCursor.classList.remove('clicking'));
 
     // ─── RAZORPAY-STYLE GRID ANIMATION ───
     const gridCanvas = document.getElementById('grid-canvas');
