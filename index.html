@@ -21,7 +21,6 @@
 
     html { 
       scroll-behavior: smooth;
-      scroll-snap-type: y mandatory;
     }
 
     body {
@@ -133,23 +132,49 @@
     /* ─── SECTIONS WRAPPER ─── */
     main { position: relative; z-index: 1; }
 
-    /* ─── HERO ─── */
-    .hero {
-      min-height: 100svh;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: flex-start;
-      padding: 0 6vw;
+    /* ─── HERO SCROLL STORYTELLING ─── */
+    .hero-scroll-container {
+      height: 400svh;
       position: relative;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
     }
+    .hero {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 6vw;
+      overflow: hidden;
+    }
+
+    .hero-frame {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(30px);
+      pointer-events: none;
+    }
+    .hero-frame.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Frame 1: Intro */
     .hero-eyebrow {
       font-family: 'JetBrains Mono', monospace;
       color: var(--blue);
       font-size: 0.9rem;
       margin-bottom: 20px;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.2s forwards;
     }
     .hero h1 {
       font-family: 'Cormorant Garamond', serif;
@@ -157,14 +182,28 @@
       font-weight: 500;
       line-height: 1.0;
       margin-bottom: 24px;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.4s forwards;
       letter-spacing: -1px;
     }
     .hero h1 .name-highlight {
       color: var(--blue);
       font-style: italic;
     }
+
+    /* Frame 2: Statement */
+    .hero-statement {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.4;
+      max-width: 700px;
+      color: var(--gray);
+    }
+    .hero-statement em {
+      color: var(--blue);
+      font-style: italic;
+    }
+
+    /* Frame 3: Details */
     .hero-desc {
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.95rem, 1.5vw, 1.1rem);
@@ -172,24 +211,26 @@
       color: var(--gray);
       max-width: 520px;
       line-height: 1.8;
-      margin-bottom: 4px;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.6s forwards;
+      margin-bottom: 16px;
     }
     .hero-desc strong { color: var(--white); font-weight: 600; }
+
+    /* Frame 4: Quote + CTA */
     .hero-quote {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: rgba(0, 229, 255, 0.5);
-      margin-bottom: 44px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: rgba(255,255,255,0.4);
       font-style: italic;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.8s forwards;
+      max-width: 600px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+    .hero-quote span {
+      color: rgba(0, 229, 255, 0.6);
     }
     .hero-cta {
       display: flex; gap: 16px; flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.8s 1s forwards;
+      justify-content: center;
     }
     .btn {
       padding: 14px 32px;
@@ -889,30 +930,51 @@
   </nav>
 
   <main>
-    <!-- HERO -->
-    <section class="hero">
+    <!-- HERO SCROLL STORYTELLING -->
+    <div class="hero-scroll-container" id="hero-scroll">
+      <section class="hero">
 
-      <div class="hero-eyebrow">> hello, world</div>
-      <h1>
-        Khushi <span class="name-highlight">Sharma</span>
-      </h1>
-      <p class="hero-desc">
-        <strong>AI/ML Developer</strong> building practical AI systems.<br>
-        Computer Science student focused on <strong>GenAI</strong>, <strong>RAG</strong>, <strong>computer vision</strong>, and full-stack AI applications.
-      </p>
-      <p class="hero-quote">
-        "It doesn't matter what happened yesterday. You have to focus on what you can do today." — Max Verstappen
-      </p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">Get in touch</a>
-        <a href="https://github.com/khushi-sharma2506" target="_blank" class="btn btn-ghost">GitHub ↗</a>
-      </div>
+        <!-- Frame 1: Name intro -->
+        <div class="hero-frame active" id="frame-1">
+          <div class="hero-eyebrow">> hello, world</div>
+          <h1>Khushi <span class="name-highlight">Sharma</span></h1>
+        </div>
 
-      <div class="scroll-indicator">
-        <span>scroll</span>
-        <div class="scroll-line"></div>
-      </div>
-    </section>
+        <!-- Frame 2: Big statement -->
+        <div class="hero-frame" id="frame-2">
+          <p class="hero-statement">
+            I <em>build</em> with AI,<br>not just talk about it.
+          </p>
+        </div>
+
+        <!-- Frame 3: Description -->
+        <div class="hero-frame" id="frame-3">
+          <p class="hero-desc">
+            <strong>AI/ML Developer</strong> building practical AI systems.<br>
+            Computer Science student focused on <strong>GenAI</strong>, <strong>RAG</strong>, <strong>computer vision</strong>, and full-stack AI applications.
+          </p>
+        </div>
+
+        <!-- Frame 4: Quote + CTA -->
+        <div class="hero-frame" id="frame-4">
+          <p class="hero-quote">
+            "It doesn't matter what happened yesterday.<br>
+            You have to focus on what you can <span>do today</span>."<br>
+            — Max Verstappen
+          </p>
+          <div class="hero-cta">
+            <a href="#contact" class="btn btn-primary">Get in touch</a>
+            <a href="https://github.com/khushi-sharma2506" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+          </div>
+        </div>
+
+        <div class="scroll-indicator">
+          <span>scroll</span>
+          <div class="scroll-line"></div>
+        </div>
+
+      </section>
+    </div>
 
     <!-- ABOUT -->
     <section id="about">
@@ -1344,7 +1406,45 @@
     document.addEventListener('mousedown', () => gtaCursor.classList.add('clicking'));
     document.addEventListener('mouseup', () => gtaCursor.classList.remove('clicking'));
 
-    // ─── RAZORPAY-STYLE GRID ANIMATION ───
+    // ─── HERO SCROLL STORYTELLING ───
+    const heroContainer = document.getElementById('hero-scroll');
+    const frames = [
+      document.getElementById('frame-1'),
+      document.getElementById('frame-2'),
+      document.getElementById('frame-3'),
+      document.getElementById('frame-4'),
+    ];
+    const totalFrames = frames.length;
+
+    function updateHeroFrames() {
+      if (!heroContainer) return;
+      const rect = heroContainer.getBoundingClientRect();
+      const scrolled = -rect.top;
+      const containerH = heroContainer.offsetHeight - window.innerHeight;
+      const progress = Math.max(0, Math.min(1, scrolled / containerH));
+
+      // Determine which frame to show (divide progress into equal segments)
+      const frameIndex = Math.min(totalFrames - 1, Math.floor(progress * totalFrames));
+
+      frames.forEach((f, i) => {
+        if (i === frameIndex) {
+          f.classList.add('active');
+        } else {
+          f.classList.remove('active');
+        }
+      });
+
+      // Fade out scroll indicator as soon as we scroll
+      const indicator = document.querySelector('.hero .scroll-indicator');
+      if (indicator) {
+        indicator.style.opacity = Math.max(0, 1 - (scrolled / 100));
+      }
+    }
+
+    window.addEventListener('scroll', updateHeroFrames);
+    updateHeroFrames();
+
+
     const gridCanvas = document.getElementById('grid-canvas');
     const gCtx = gridCanvas.getContext('2d');
 
